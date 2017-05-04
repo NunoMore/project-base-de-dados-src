@@ -2,6 +2,8 @@ package io.altar.jseproject.model;
 
 import java.util.Scanner;
 
+import io.altar.jseproject.test.Test;
+
 
 public class Product {
 	public int id;
@@ -12,6 +14,9 @@ public class Product {
 	public double pvp;
 	
 	public void create(Scanner sc){
+		
+		//coloca id
+		this.setId(Test.products.size() -1); 
 		
 		//coloca nome
 		System.out.println("\nQual o nome do produto?");
@@ -47,7 +52,7 @@ public class Product {
 		//coloca pvp
 		double productPvp = 0;
 		while(true){
-			System.out.println("\nQual o PVP do produto(€)?");
+			System.out.println("\nQual o PVP do produto(euros)?");
 			try {
 				productPvp = Double.parseDouble( sc.nextLine() );
 				break;

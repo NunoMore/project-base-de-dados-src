@@ -166,9 +166,13 @@ public class TextInterface {
 			
 			switch (option){
 			
-				case 1: Test.shelfs.add(new Shelf());
+				case 1: //cria nova prateleira
+						Test.shelfs.add(new Shelf());
 						System.out.println("\nNova prateleira criada!");
-				
+						
+						Test.shelfs.get( Test.shelfs.size() -1 ).create(sc); 
+						
+						//emite lista de produtos
 						System.out.println("\nShelf List:");
 						for (int i = 0; i < Test.shelfs.size(); i++) {
 							Test.shelfs.get(i).show();
