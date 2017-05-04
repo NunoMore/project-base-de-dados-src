@@ -82,9 +82,10 @@ public class TextInterface {
 		
 			switch (option){
 			
-				case 1: //cria novo produto
+				case 1: //cria novo produto vazio
 						Test.products.add(new Product());
 						
+						//preenche o produto vazio criado
 						Test.products.get( Test.products.size() -1 ).create(sc); 
 						
 						//emite lista de produtos
@@ -109,29 +110,12 @@ public class TextInterface {
 						
 						Test.products.get(productId).update(sc);
 						
-						
-//						//alterar prateleiras de exposicao
-//						int[] shelfId;
-//						while(true){
-//							System.out.println("\nAlterar prateleiras de exposicao."
-//												+ "\nDeve colocar novamente mesmo que queira manter a exposicao corrente."
-//												+ "\nDe momento o produto está exposto nas prateleiras:");
-//							
-//							for(int i = 0; i < Test.products.get( productId ).getShelfId().length; i++){
-//								System.out.println( Test.products.get( productId ).getShelfId()[i] +"; ");
-//							}
-//							System.out.println("end.");
-//							System.out.println("\nColoque um id de exposicao: ");
-//							try {
-//								discount = Integer.parseInt( sc.nextLine() );
-//								break;
-//							} catch (Exception e){
-//								System.out.println("\nInput is not a number!");
-//							}
-//						}
-//						Test.products.get( productId ).setDiscount( discount );
+						//emite lista de produtos
+						System.out.println("\nProduct List:");
+						for (int i = 0; i < Test.products.size(); i++) {
+							Test.products.get(i).show();
+						}
 
-						
 						break;
 				case 3:
 					
@@ -177,9 +161,29 @@ public class TextInterface {
 						for (int i = 0; i < Test.shelfs.size(); i++) {
 							Test.shelfs.get(i).show();
 						}
+						
 						break;
 					
-				case 2: 
+				case 2: //pedido de ID
+						int shelfId = 0;
+						while(true){
+							System.out.println("\nQual o ID da prateleira a editar?");
+							try {
+								shelfId = Integer.parseInt( sc.nextLine() );
+								break;
+							} catch (Exception e){
+								System.out.println("\nInput is not a number!");
+							}
+						}
+						
+						Test.shelfs.get(shelfId).update(sc);
+						
+						//emite lista de prateleiras
+						System.out.println("\nShelf List:");
+						for (int i = 0; i < Test.shelfs.size(); i++) {
+							Test.shelfs.get(i).show();
+						}
+					
 						break;
 				case 3:
 						break;

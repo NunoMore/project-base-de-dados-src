@@ -1,14 +1,14 @@
 package io.altar.jseproject.model;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import io.altar.jseproject.test.Test;
 
 
-public class Product {
-	public int id;
+public class Product extends Entity{
 	public String name;
-	public int[] shelfId;
+	public ArrayList<Integer> shelfId = new ArrayList<>();
 	public int discount;
 	public double iva;
 	public double pvp;
@@ -69,6 +69,9 @@ public class Product {
 		
 		//alterar nome
 		System.out.println("\nAlterar nome("+ this.getName() +"): ");
+		if (sc.nextLine()==null) {
+			System.out.println("O valor foi mantido.");
+		}
 		this.setName( sc.nextLine() );
 		
 		//alterar pvp
@@ -76,8 +79,14 @@ public class Product {
 		while(true){
 			System.out.println("\nAlterar PVP("+ this.getPvp() +"euros): ");
 			try {
+				if (sc.nextLine()==null) {
+					pvp = this.getPvp();
+					System.out.println("O valor foi mantido.");
+				} else {
 				pvp = Double.parseDouble( sc.nextLine() );
+				}
 				break;
+				
 			} catch (Exception e){
 				System.out.println("\nInput is not a number!");
 			}
@@ -89,6 +98,11 @@ public class Product {
 		while(true){
 			System.out.println("\nAlterar IVA("+ this.getIva() +"%): ");
 			try {
+				if (sc.nextLine()==null) {
+					iva = this.getIva();
+					System.out.println("O valor foi mantido.");
+					break;
+				}
 				iva = Double.parseDouble( sc.nextLine() );
 				break;
 			} catch (Exception e){
@@ -102,6 +116,11 @@ public class Product {
 		while(true){
 			System.out.println("\nAlterar desconto("+ this.getDiscount() +"%): ");
 			try {
+				if (sc.nextLine()==null) {
+					discount = this.getDiscount();
+					System.out.println("O valor foi mantido.");
+					break;
+				}
 				discount = Integer.parseInt( sc.nextLine() );
 				break;
 			} catch (Exception e){
@@ -116,7 +135,7 @@ public class Product {
 							this.getName() +", (PVP) " + 
 							this.getPvp() +"euros, (IVA)" + 
 							this.getIva() +"%, (desconto) " + 
-							this.getDiscount() +"%.\n");
+							this.getDiscount() +"%.");
 	}
 	
 	public String getName() {
@@ -126,18 +145,6 @@ public class Product {
 		if(name!=null){
 			this.name = name;
 		}
-	}
-	public int[] getShelfId() {
-		return shelfId;
-	}
-	public void setShelfId(int[] shelfId) {
-		this.shelfId = shelfId;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public int getDiscount() {
 		return discount;
@@ -156,6 +163,12 @@ public class Product {
 	}
 	public void setPvp(double pvp) {
 		this.pvp = pvp;
+	}
+	public static ArrayList<Integer> getShelfId() {
+		return shelfId;
+	}
+	public static void setShelfId(ArrayList<Integer> shelfId) {
+		Product.shelfId = shelfId;
 	}
 	
 }

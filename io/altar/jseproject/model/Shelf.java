@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 import io.altar.jseproject.test.Test;
 
-public class Shelf {
-	public int id;
+public class Shelf extends Entity{
 	public int location;
 	public int capacity;
 	public int productId;
@@ -57,6 +56,68 @@ public class Shelf {
 		
 	}
 	
+	public void update(Scanner sc){
+		
+		System.out.println("\nCaso deseje manter algum campo basta clicar em 'enter' com o campo vazio.");
+		
+		//alterar capacidade
+		int capacity = 0;
+		while(true){
+			System.out.println("\nAlterar capacidade("+ this.getCapacity() +"): ");
+			try {
+				capacity = Integer.parseInt( sc.nextLine() );
+				break;
+			} catch (Exception e){
+				System.out.println("\nInput is not a valid number!");
+			}
+		}
+		this.setCapacity(capacity);
+		
+		//alterar localizacao
+		int location = 0;
+		while(true){
+			System.out.println("\nAlterar codigo de localizacao("+ this.getLocation() +"): ");
+			try {
+				location = Integer.parseInt( sc.nextLine() );
+				break;
+			} catch (Exception e){
+				System.out.println("\nInput is not a valid number!");
+			}
+		}
+		this.setLocation(location);
+		
+		//alterar preco de aluguer
+		double price = 0;
+		while(true){
+			System.out.println("\nAlterar preco de aluguer("+ this.getRentPrice() +"euros): ");
+			try {
+				price = Double.parseDouble( sc.nextLine() );
+				break;
+			} catch (Exception e){
+				System.out.println("\nInput is not a number!");
+			}
+		}
+		this.setRentPrice(price);
+		
+		//alterar produto
+		int product = 0;
+		while(true){
+			System.out.println("\nDe momento existe o produto "+ this.getProductId() +"."
+								+ "\nCaso pretenda manter coloque de novo o ID a que se refere.");
+			try {
+				if (sc.nextLine()==null) {
+					System.out.println("Nao foi colocado qualquer produto na prateleira.");
+					break;
+				}
+				product = Integer.parseInt( sc.nextLine() );
+				break;
+			} catch (Exception e){
+				System.out.println("\nInput is not a valid number!");
+			}
+		}
+		this.setProductId(product);
+	}
+	
 	public void show() {
 		System.out.println("Produto " + this.getId() + ": (localizacao) " + 
 				this.getLocation() +", (capacidade) " + 
@@ -65,12 +126,6 @@ public class Shelf {
 				this.getRentPrice() +"euros.\n");
 	}
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public int getLocation() {
 		return location;
 	}
