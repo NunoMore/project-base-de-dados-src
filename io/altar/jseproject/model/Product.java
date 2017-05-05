@@ -3,8 +3,6 @@ package io.altar.jseproject.model;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import io.altar.jseproject.test.Test;
-
 
 public class Product extends Entity{
 	public String name;
@@ -13,10 +11,8 @@ public class Product extends Entity{
 	public double iva;
 	public double pvp;
 	
-	public void create(Scanner sc){
-		
-		//coloca id
-		this.setId(Test.products.size() -1); 
+	public void create(){
+		Scanner sc = new Scanner(System.in);
 		
 		//coloca nome
 		System.out.println("\nQual o nome do produto?");
@@ -24,46 +20,48 @@ public class Product extends Entity{
 		this.setName(productName);
 		
 		//coloca desconto
-		int productDiscount = 0;
+		int intAux = 0;
 		while(true){
 			System.out.println("\nQual o desconto do produto (%)? (valor unitario em percentagem)");
 			try {
-				productDiscount = Integer.parseInt( sc.nextLine() );
+				intAux = Integer.parseInt( sc.nextLine() );
 				break;
 			} catch (Exception e){
 				System.out.println("\nInput is not a number!");
 			}
 		}
-		this.setDiscount(productDiscount);
+		this.setDiscount(intAux);
 		
 		//coloca iva
-		double productIva = 0;
+		double doubleAux = 0;
 		while(true){
 			System.out.println("\nQual o IVA do produto(%)?");
 			try {
-				productIva = Double.parseDouble( sc.nextLine() );
+				doubleAux = Double.parseDouble( sc.nextLine() );
 				break;
 			} catch (Exception e){
 				System.out.println("\nInput is not a number!");
 			}
 		}
-		this.setIva(productIva);
+		this.setIva(doubleAux);
 		
 		//coloca pvp
-		double productPvp = 0;
+		doubleAux = 0;
 		while(true){
 			System.out.println("\nQual o PVP do produto(euros)?");
 			try {
-				productPvp = Double.parseDouble( sc.nextLine() );
+				doubleAux = Double.parseDouble( sc.nextLine() );
 				break;
 			} catch (Exception e){
 				System.out.println("\nInput is not a number!");
 			}
 		}
-		this.setPvp(productPvp);
+		this.setPvp(doubleAux);
+//		sc.close();
 	}
 	
-	public void update(Scanner sc) {
+	public void update() {
+		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("\nCaso deseje manter algum campo basta clicar em 'enter'.");
 		
@@ -75,15 +73,15 @@ public class Product extends Entity{
 		this.setName( sc.nextLine() );
 		
 		//alterar pvp
-		double pvp = 0;
+		double doubleAux = 0;
 		while(true){
 			System.out.println("\nAlterar PVP("+ this.getPvp() +"euros): ");
 			try {
 				if (sc.nextLine()==null) {
-					pvp = this.getPvp();
+					doubleAux = this.getPvp();
 					System.out.println("O valor foi mantido.");
 				} else {
-				pvp = Double.parseDouble( sc.nextLine() );
+					doubleAux = Double.parseDouble( sc.nextLine() );
 				}
 				break;
 				
@@ -91,43 +89,44 @@ public class Product extends Entity{
 				System.out.println("\nInput is not a number!");
 			}
 		}
-		this.setPvp( pvp );
+		this.setPvp( doubleAux );
 		
 		//alterar iva
-		double iva = 0;
+		doubleAux = 0;
 		while(true){
 			System.out.println("\nAlterar IVA("+ this.getIva() +"%): ");
 			try {
 				if (sc.nextLine()==null) {
-					iva = this.getIva();
+					doubleAux = this.getIva();
 					System.out.println("O valor foi mantido.");
 					break;
 				}
-				iva = Double.parseDouble( sc.nextLine() );
+				doubleAux = Double.parseDouble( sc.nextLine() );
 				break;
 			} catch (Exception e){
 				System.out.println("\nInput is not a number!");
 			}
 		}
-		this.setIva( iva );
+		this.setIva( doubleAux );
 		
 		//alterar desconto
-		int discount = 0;
+		int intAux = 0;
 		while(true){
 			System.out.println("\nAlterar desconto("+ this.getDiscount() +"%): ");
 			try {
 				if (sc.nextLine()==null) {
-					discount = this.getDiscount();
+					intAux = this.getDiscount();
 					System.out.println("O valor foi mantido.");
 					break;
 				}
-				discount = Integer.parseInt( sc.nextLine() );
+				intAux = Integer.parseInt( sc.nextLine() );
 				break;
 			} catch (Exception e){
 				System.out.println("\nInput is not a number!");
 			}
 		}
-		this.setDiscount( discount );
+		this.setDiscount( intAux );
+//		sc.close();
 	}
 	
 	public void show() {
@@ -163,12 +162,5 @@ public class Product extends Entity{
 	}
 	public void setPvp(double pvp) {
 		this.pvp = pvp;
-	}
-	public static ArrayList<Integer> getShelfId() {
-		return shelfId;
-	}
-	public static void setShelfId(ArrayList<Integer> shelfId) {
-		Product.shelfId = shelfId;
-	}
-	
+	}	
 }

@@ -1,10 +1,7 @@
 package io.altar.jseproject.repositories;
 
-import java.awt.List;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Set;
 
 import io.altar.jseproject.model.Entity;
 
@@ -30,16 +27,14 @@ public abstract class EntityRepository <Entidade extends Entity> { //Entidade se
 		return this.m1.values();
 	}
 	
-	public Entidade consult(Long id){
+	public Entidade consult(long id){
 		return this.m1.get(id);
 	}
 	
-	public void edit(Entidade ent){
-		
-	}
+//	public void edit(Entidade ent){} // nao é utilizada... será mesmo necessario???
 	
-	public void remove(Entidade ent){
-		
+	public void remove(long id){
+		this.m1.remove(id);
 	}
 	
 }

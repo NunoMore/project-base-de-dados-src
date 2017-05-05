@@ -2,105 +2,116 @@ package io.altar.jseproject.model;
 
 import java.util.Scanner;
 
-import io.altar.jseproject.test.Test;
-
 public class Shelf extends Entity{
 	public int location;
 	public int capacity;
 	public int productId;
 	public double rentPrice;
 	
-	public void create(Scanner sc) {
+	public void create() {
 		
-		//coloca id
-		this.setId(Test.shelfs.size() -1); 
+		Scanner sc = new Scanner(System.in);
 		
 		//coloca localizacao (se nao for integer tem de ser alterado este codigo !!!!)
-		int location = 0;
+		int intAux = 0;
 		while(true){
 			System.out.println("\nQual a localizacao da prateleira? (codigo unitario)");
 			try {
-				location = Integer.parseInt( sc.nextLine() );
+				intAux = Integer.parseInt( sc.nextLine() );
 				break;
 			} catch (Exception e){
 				System.out.println("\nInput is not a number!");
 			}
 		}
-		this.setLocation(location);
+		this.setLocation(intAux);
 				
 		//coloca capacidade
-		int capacity = 0;
+		intAux = 0;
 		while(true){
 			System.out.println("\nQual a capacidade da prateleira (produtos)? (valor unitario)");
 			try {
-				capacity = Integer.parseInt( sc.nextLine() );
+				intAux = Integer.parseInt( sc.nextLine() );
 				break;
 			} catch (Exception e){
 				System.out.println("\nInput is not a number!");
 			}
 		}
-		this.setCapacity(capacity);
+		this.setCapacity(intAux);
 		
 		//coloca preco de aluguer
-		double price = 0;
+		double doubleAux = 0;
 		while(true){
 			System.out.println("\nQual o preco de aluguer da prateleira (euros)?");
 			try {
-				price = Double.parseDouble( sc.nextLine() );
+				doubleAux = Double.parseDouble( sc.nextLine() );
 				break;
 			} catch (Exception e){
 				System.out.println("\nInput is not a number!");
 			}
 		}
-		this.setRentPrice(price);
+		this.setRentPrice(doubleAux);
 		
+		//coloca product ID
+		intAux = 0;
+		while(true){
+			System.out.println("\nQual o ID do produto a colocar na prateleira? (valor unitario)");
+			try {
+				intAux = Integer.parseInt( sc.nextLine() );
+				break;
+			} catch (Exception e){
+				System.out.println("\nInput is not a number!");
+			}
+		}
+		this.setProductId(intAux);
+		sc.close();
 	}
 	
-	public void update(Scanner sc){
+	public void update(){
 		
 		System.out.println("\nCaso deseje manter algum campo basta clicar em 'enter' com o campo vazio.");
+		Scanner sc = new Scanner(System.in);
 		
 		//alterar capacidade
-		int capacity = 0;
+		int intAux = 0;
 		while(true){
 			System.out.println("\nAlterar capacidade("+ this.getCapacity() +"): ");
 			try {
-				capacity = Integer.parseInt( sc.nextLine() );
+				intAux = Integer.parseInt( sc.nextLine() );
 				break;
 			} catch (Exception e){
 				System.out.println("\nInput is not a valid number!");
 			}
 		}
-		this.setCapacity(capacity);
+		this.setCapacity(intAux);
 		
 		//alterar localizacao
-		int location = 0;
+		intAux = 0;
 		while(true){
 			System.out.println("\nAlterar codigo de localizacao("+ this.getLocation() +"): ");
 			try {
-				location = Integer.parseInt( sc.nextLine() );
+				intAux = Integer.parseInt( sc.nextLine() );
 				break;
 			} catch (Exception e){
 				System.out.println("\nInput is not a valid number!");
 			}
 		}
-		this.setLocation(location);
+		this.setLocation(intAux);
 		
 		//alterar preco de aluguer
-		double price = 0;
+		double doubleAux = 0;
 		while(true){
 			System.out.println("\nAlterar preco de aluguer("+ this.getRentPrice() +"euros): ");
 			try {
-				price = Double.parseDouble( sc.nextLine() );
+				doubleAux = Double.parseDouble( sc.nextLine() );
 				break;
 			} catch (Exception e){
 				System.out.println("\nInput is not a number!");
 			}
 		}
-		this.setRentPrice(price);
+		this.setRentPrice(doubleAux);
 		
 		//alterar produto
-		int product = 0;
+		intAux = 0;
 		while(true){
 			System.out.println("\nDe momento existe o produto "+ this.getProductId() +"."
 								+ "\nCaso pretenda manter coloque de novo o ID a que se refere.");
@@ -109,13 +120,14 @@ public class Shelf extends Entity{
 					System.out.println("Nao foi colocado qualquer produto na prateleira.");
 					break;
 				}
-				product = Integer.parseInt( sc.nextLine() );
+				intAux = Integer.parseInt( sc.nextLine() );
 				break;
 			} catch (Exception e){
 				System.out.println("\nInput is not a valid number!");
 			}
 		}
-		this.setProductId(product);
+		this.setProductId(intAux);
+		sc.close();
 	}
 	
 	public void show() {
@@ -150,6 +162,4 @@ public class Shelf extends Entity{
 	public void setRentPrice(double rentPrice) {
 		this.rentPrice = rentPrice;
 	}
-	
-
 }

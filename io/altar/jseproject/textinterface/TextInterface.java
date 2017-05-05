@@ -4,133 +4,165 @@ import java.util.Scanner;
 
 import io.altar.jseproject.model.Product;
 import io.altar.jseproject.model.Shelf;
-import io.altar.jseproject.test.Test;
+import io.altar.jseproject.repositories.ProductRepository;
+import io.altar.jseproject.repositories.ShelfRepository;
 
 public class TextInterface {
 	
 	public static void mainMenu(){
 		
-		Scanner sc = new Scanner(System.in);
-		int option = 0;
+		Scanner sc1 = new Scanner(System.in);
 		
-		while( option!=3 ){
+		Boolean run = true;
+		
+		while( run == true ){
 
 			System.out.println("\nPor favor selecione uma das seguintes opcoes: \n"
 					+ "1) Listar produtos \n"
 					+ "2) Listar prateleiras \n"
 					+ "3) Sair");
 			
-			try {
-				option = Integer.parseInt( sc.nextLine() );
-			} catch (Exception e){
-				System.out.println("\nInput is not a number!");
+			while(!sc1.hasNextInt()){
+				System.out.println("\nInput is not a valid number!");
+				sc1.next();
 			}
+			int option = sc1.nextInt();
 		
 			switch (option){
 			
-				case 1: if(Test.products.isEmpty()){
-							System.out.println("\nThere are no products.");
-						} else{
-							System.out.println("\nProduct List:");
-							for (int i = 0; i < Test.products.size(); i++) {
-								Test.products.get(i).show();
-							}
+				case 1: 
+					//emite lista de produtos
+					if (ProductRepository.getInstance().consult().size() != 0) {
+						System.out.println("\nProduct List:");
+						for (long i = 1; i <= ProductRepository.getInstance().consult().size(); i++) {
+							ProductRepository.getInstance().consult(i).show();
 						}
-						screenOption1(sc);
+					} else{
+						System.out.println("\nThere are no products!");
+					}
+					
+					screenOption1();
+					
+					break;
 						
-						break;
-						
-				case 2: if(Test.shelfs.isEmpty()){
-							System.out.println("\nThere are no shelfs.");
-						} else{
-							System.out.println("\nShelf List:");
-							for (int i = 0; i < Test.shelfs.size(); i++) {
-								System.out.println("Prateleira " + Test.shelfs.get(i).id + ".\n");
-							}
+				case 2: 
+					//emite lista de prateleiras
+					if (ShelfRepository.getInstance().consult().size() != 0) {
+						System.out.println("\nShelf List:");
+						for (long i = 1; i <= ShelfRepository.getInstance().consult().size(); i++) {
+							ShelfRepository.getInstance().consult(i).show();
 						}
-						screenOption2(sc);
+					} else{
+						System.out.println("\nThere are no shelfs!");
+					}
+					
+					screenOption2();
+					
+					break;
+					
+				case 3: 
+					System.out.println("\nGood bye!");
+					run = false;
 						
-						break;
+					break;
 						
-				case 3: System.out.println("\nGood bye!");
-						sc.close();
-						
-						break;
-						
-				default: System.out.println("\nInvalid input...");
-						break;
+				default: 
+					System.out.println("\nInvalid input...");
+					break;
 			}
 		}
 	}
 	
-	public static void screenOption1(Scanner sc){
+	public static void screenOption1(){
+		Scanner sc2 = new Scanner(System.in);
 		
-		int option = 0;
+		Boolean run = true;
 		
-		while( option!=5 ){
+		while( run == true ){
 			System.out.println("\nPor favor selecione uma das seguintes opcoes: \n"
 					+ "1) Criar novo Produto \n"
 					+ "2) Editar um produto existente \n"
 					+ "3) Consultar o detalhe de um produto \n"
 					+ "4) Remover um produto \n"
 					+ "5) Voltar ao ecra anterior");
-			try {
-				option = Integer.parseInt( sc.nextLine() );
-			} catch (Exception e){
-				System.out.println("\nInput is not a number!");
+			
+			while(!sc2.hasNextInt()){
+				System.out.println("\nInput is not an integer!");
+				sc2.next();
 			}
-		
+			int option = sc2.nextInt();
+			
+			long productId = 0;
 			switch (option){
 			
-				case 1: //cria novo produto vazio
-						Test.products.add(new Product());
+				case 1: //cria novo produto
+						ProductRepository.getInstance().consult(
+								ProductRepository.getInstance().create(new Product())
+								).create();
 						
-						//preenche o produto vazio criado
-						Test.products.get( Test.products.size() -1 ).create(sc); 
-						
-						//emite lista de produtos
+						//emite lista de produtos						
 						System.out.println("\nProduct List:");
-						for (int i = 0; i < Test.products.size(); i++) {
-							Test.products.get(i).show();
+						for (long i = 1; i <= ProductRepository.getInstance().consult().size(); i++) {
+							ProductRepository.getInstance().consult(i).show();
 						}
 						
 						break;
 				
 				case 2: //pedido de ID
-						int productId = 0;
-						while(true){
-							System.out.println("\nQual o ID do produto a editar?");
-							try {
-								productId = Integer.parseInt( sc.nextLine() );
-								break;
-							} catch (Exception e){
-								System.out.println("\nInput is not a number!");
-							}
+						while(!sc2.hasNextLong()){
+							System.out.println("\nInput is not a valid number!");
+							sc2.next();
 						}
+						productId = sc2.nextLong();
 						
-						Test.products.get(productId).update(sc);
+						ProductRepository.getInstance().consult(productId).update();
 						
-						//emite lista de produtos
+						//emite lista de produtos						
 						System.out.println("\nProduct List:");
-						for (int i = 0; i < Test.products.size(); i++) {
-							Test.products.get(i).show();
+						for (long i = 0; i < ProductRepository.getInstance().consult().size(); i++) {
+							ProductRepository.getInstance().consult(i).show();
 						}
 
 						break;
-				case 3:
+						
+				case 3: 
+					//pedido de ID
+					while(!sc2.hasNextLong()){
+						System.out.println("\nInput is not a valid number!");
+						sc2.next();
+					}
+					productId = sc2.nextLong();
+						
+					ProductRepository.getInstance().consult(productId).show();
+				
+					break;
 					
-						break;
 				case 4:
-					
-						break;
-				case 5: break;
-				default: System.out.println("\nInvalid input...");
-						break;
+					//pedido de ID
+					while(!sc2.hasNextLong()){
+						System.out.println("\nInput is not a valid number!");
+						sc2.next();
+					}
+					productId = sc2.nextLong();
+						
+					ProductRepository.getInstance().remove(productId);
+				
+					break;
+						
+				case 5: 
+					run = false;
+					break;
+				
+				default: 
+					System.out.println("\nInvalid input...");
+					break;
 			}
 		}
+//		sc2.close();
 	}
 	
-	public static void screenOption2(Scanner sc){
+	public static void screenOption2(){
+		Scanner sc3 = new Scanner(System.in);
 		
 		int option = 0;
 		
@@ -143,57 +175,88 @@ public class TextInterface {
 					+ "5) Voltar ao ecra anterior \n");
 			
 			try {
-				option = Integer.parseInt( sc.nextLine() );
+				option = Integer.parseInt( sc3.nextLine() );
 			} catch (Exception e){
 				System.out.println("\nInput is not a number!");
 			}
 			
+			long shelfId = 0;
+			
 			switch (option){
 			
 				case 1: //cria nova prateleira
-						Test.shelfs.add(new Shelf());
-						System.out.println("\nNova prateleira criada!");
-						
-						Test.shelfs.get( Test.shelfs.size() -1 ).create(sc); 
-						
-						//emite lista de produtos
+						ShelfRepository.getInstance().consult(
+								ShelfRepository.getInstance().create(new Shelf())
+							).create();
+					
+						//emite lista de prateleiras						
 						System.out.println("\nShelf List:");
-						for (int i = 0; i < Test.shelfs.size(); i++) {
-							Test.shelfs.get(i).show();
+						for (long i = 0; i < ShelfRepository.getInstance().consult().size(); i++) {
+							ShelfRepository.getInstance().consult(i).show();
 						}
 						
 						break;
 					
 				case 2: //pedido de ID
-						int shelfId = 0;
+						shelfId = 0;
 						while(true){
 							System.out.println("\nQual o ID da prateleira a editar?");
 							try {
-								shelfId = Integer.parseInt( sc.nextLine() );
+								shelfId = Long.parseLong( sc3.nextLine() );
 								break;
 							} catch (Exception e){
 								System.out.println("\nInput is not a number!");
 							}
 						}
 						
-						Test.shelfs.get(shelfId).update(sc);
+						ShelfRepository.getInstance().consult(shelfId).update();
 						
-						//emite lista de prateleiras
+						//emite lista de prateleiras						
 						System.out.println("\nShelf List:");
-						for (int i = 0; i < Test.shelfs.size(); i++) {
-							Test.shelfs.get(i).show();
+						for (long i = 0; i < ShelfRepository.getInstance().consult().size(); i++) {
+							ShelfRepository.getInstance().consult(i).show();
 						}
 					
 						break;
-				case 3:
+						
+				case 3: //pedido de ID
+						shelfId = 0;
+						while(true){
+							System.out.println("\nQual o ID da prateleira a consultar?");
+							try {
+								shelfId = Long.parseLong( sc3.nextLine() );
+								break;
+							} catch (Exception e){
+								System.out.println("\nInput is not a number!");
+							}
+						}
+						
+						ShelfRepository.getInstance().consult(shelfId).show();
+					
 						break;
-				case 4:
+						
+				case 4://pedido de ID
+						shelfId = 0;
+						while(true){
+							System.out.println("\nQual o ID da prateleira a remover?");
+							try {
+								shelfId = Long.parseLong( sc3.nextLine() );
+								break;
+							} catch (Exception e){
+								System.out.println("\nInput is not a number!");
+							}
+						}
+						
+						ShelfRepository.getInstance().remove(shelfId);
+					
 						break;
+						
 				case 5: break;
+				
 				default: System.out.println("\nInvalid input...");
+						break;
 			}
 		}
+//		sc3.close();
 	}
-	
-	
 }
