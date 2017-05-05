@@ -19,45 +19,22 @@ public class Product extends Entity{
 		String productName = sc.nextLine();
 		this.setName(productName);
 		
+		sc.close();
+		
 		//coloca desconto
-		int intAux = 0;
-		while(true){
-			System.out.println("\nQual o desconto do produto (%)? (valor unitario em percentagem)");
-			try {
-				intAux = Integer.parseInt( sc.nextLine() );
-				break;
-			} catch (Exception e){
-				System.out.println("\nInput is not a number!");
-			}
-		}
+		System.out.println("\nQual o desconto do produto (%)? (valor unitario em percentagem)");
+		int intAux = checkInputInt();
 		this.setDiscount(intAux);
 		
 		//coloca iva
-		double doubleAux = 0;
-		while(true){
-			System.out.println("\nQual o IVA do produto(%)?");
-			try {
-				doubleAux = Double.parseDouble( sc.nextLine() );
-				break;
-			} catch (Exception e){
-				System.out.println("\nInput is not a number!");
-			}
-		}
+		System.out.println("\nQual o IVA do produto(%)?");
+		double doubleAux = checkInputDouble();
 		this.setIva(doubleAux);
 		
 		//coloca pvp
-		doubleAux = 0;
-		while(true){
-			System.out.println("\nQual o PVP do produto(euros)?");
-			try {
-				doubleAux = Double.parseDouble( sc.nextLine() );
-				break;
-			} catch (Exception e){
-				System.out.println("\nInput is not a number!");
-			}
-		}
+		System.out.println("\nQual o PVP do produto(euros)?");
+		doubleAux = checkInputDouble();
 		this.setPvp(doubleAux);
-//		sc.close();
 	}
 	
 	public void update() {
@@ -73,21 +50,18 @@ public class Product extends Entity{
 		this.setName( sc.nextLine() );
 		
 		//alterar pvp
+		System.out.println("\nAlterar PVP("+ this.getPvp() +"euros): ");
+		
 		double doubleAux = 0;
-		while(true){
-			System.out.println("\nAlterar PVP("+ this.getPvp() +"euros): ");
-			try {
-				if (sc.nextLine()==null) {
-					doubleAux = this.getPvp();
-					System.out.println("O valor foi mantido.");
-				} else {
-					doubleAux = Double.parseDouble( sc.nextLine() );
-				}
-				break;
+		if (sc.nextLine()==null) {
+			doubleAux = this.getPvp();
+			System.out.println("O valor foi mantido.");
+		} else {
+			doubleAux = checkInputDouble();
+		}
+		break;
 				
-			} catch (Exception e){
-				System.out.println("\nInput is not a number!");
-			}
+			
 		}
 		this.setPvp( doubleAux );
 		
@@ -126,7 +100,7 @@ public class Product extends Entity{
 			}
 		}
 		this.setDiscount( intAux );
-//		sc.close();
+		sc.close();
 	}
 	
 	public void show() {
