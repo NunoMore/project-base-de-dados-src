@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Product extends Entity{
 	public String name;
-	public ArrayList<Integer> shelfId = new ArrayList<>();
+	public ArrayList<Integer> shelfId = new ArrayList<>(); // not done yet...
 	public int discount;
 	public double iva;
 	public double pvp;
@@ -40,67 +40,52 @@ public class Product extends Entity{
 	public void update() {
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("\nCaso deseje manter algum campo basta clicar em 'enter'.");
-		
 		//alterar nome
 		System.out.println("\nAlterar nome("+ this.getName() +"): ");
-		if (sc.nextLine()==null) {
+		boolean keep = keepValue();
+		
+		if (keep) {
 			System.out.println("O valor foi mantido.");
+		}else {
+			System.out.println("Introduza o novo nome?");
+			this.setName( sc.nextLine() );
 		}
-		this.setName( sc.nextLine() );
+		
+		
+		sc.close();
 		
 		//alterar pvp
 		System.out.println("\nAlterar PVP("+ this.getPvp() +"euros): ");
+		keep = keepValue();
 		
-		double doubleAux = 0;
-		if (sc.nextLine()==null) {
-			doubleAux = this.getPvp();
+		if (keep) {
 			System.out.println("O valor foi mantido.");
 		} else {
-			doubleAux = checkInputDouble();
+			System.out.println("Introduza o novo valor de PVP:");
+			this.setPvp( checkInputDouble() );
 		}
-		break;
-				
-			
-		}
-		this.setPvp( doubleAux );
 		
 		//alterar iva
-		doubleAux = 0;
-		while(true){
-			System.out.println("\nAlterar IVA("+ this.getIva() +"%): ");
-			try {
-				if (sc.nextLine()==null) {
-					doubleAux = this.getIva();
-					System.out.println("O valor foi mantido.");
-					break;
-				}
-				doubleAux = Double.parseDouble( sc.nextLine() );
-				break;
-			} catch (Exception e){
-				System.out.println("\nInput is not a number!");
-			}
+		System.out.println("\nAlterar IVA("+ this.getIva() +"%): ");
+		keep = keepValue();
+		
+		if (keep) {
+			System.out.println("O valor foi mantido.");
+		} else {
+			System.out.println("Introduza o novo valor de IVA:");
+			this.setIva( checkInputDouble() );
 		}
-		this.setIva( doubleAux );
 		
 		//alterar desconto
-		int intAux = 0;
-		while(true){
-			System.out.println("\nAlterar desconto("+ this.getDiscount() +"%): ");
-			try {
-				if (sc.nextLine()==null) {
-					intAux = this.getDiscount();
-					System.out.println("O valor foi mantido.");
-					break;
-				}
-				intAux = Integer.parseInt( sc.nextLine() );
-				break;
-			} catch (Exception e){
-				System.out.println("\nInput is not a number!");
-			}
+		System.out.println("\nAlterar desconto("+ this.getDiscount() +"%): ");
+		keep = keepValue();
+		
+		if (keep) {
+			System.out.println("O valor foi mantido.");
+		} else {
+			System.out.println("Introduza o novo valor de desconto:");
+			this.setDiscount( checkInputInt() );
 		}
-		this.setDiscount( intAux );
-		sc.close();
 	}
 	
 	public void show() {
@@ -115,9 +100,7 @@ public class Product extends Entity{
 		return name;
 	}
 	public void setName(String name) {
-		if(name!=null){
-			this.name = name;
-		}
+		this.name = name;
 	}
 	public int getDiscount() {
 		return discount;

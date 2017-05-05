@@ -50,4 +50,26 @@ public class Entity {
 		sc.close();
 		return number;
 	}
+	
+	public static boolean keepValue(){
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Deseja manter o valor? (s/n)");
+		while (!sc.hasNext("s") || !sc.hasNext("n")) {
+			System.out.println("Por favor, escolha 's' ou 'n' para manter(ou não) o valor!");
+		}
+		
+		boolean keep = true;
+		if (sc.next() == "s") {
+			keep = true;
+			
+		} else if (sc.next() == "n") {
+			keep = false;
+		}
+		
+		sc.close();
+		
+		return keep;
+		
+	}
 }
