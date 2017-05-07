@@ -2,6 +2,7 @@ package io.altar.jseproject.model;
 
 import java.util.Scanner;
 
+
 public class Entity {
 	public Long id;
 
@@ -21,7 +22,7 @@ public class Entity {
 		}
 		int number = sc.nextInt();
 		
-		sc.close();
+//		sc.close();  //devo fechar??? da erro ao fechar...
 		return number;
 	}
 	
@@ -34,7 +35,7 @@ public class Entity {
 		}
 		long number = sc.nextLong();
 		
-		sc.close();
+//		sc.close();  //devo fechar??? da erro ao fechar...
 		return number;
 	}
 	
@@ -47,27 +48,30 @@ public class Entity {
 		}
 		double number = sc.nextDouble();
 		
-		sc.close();
+//		sc.close();  //devo fechar??? da erro ao fechar...
 		return number;
 	}
 	
 	public static boolean keepValue(){
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Deseja manter o valor? (s/n)");
-		while (!sc.hasNext("s") || !sc.hasNext("n")) {
-			System.out.println("Por favor, escolha 's' ou 'n' para manter(ou não) o valor!");
+		System.out.println("Deseja manter o valor? (s-sim / n-nao)");
+		String yesORno = sc.nextLine();
+		
+		while (yesORno != "s" && yesORno != "n") { //nao funciona e nao sei porque...
+			System.out.println("Por favor, ecreva 's' ou 'n' para manter(ou não) o valor!");
+			yesORno = sc.nextLine();
 		}
 		
 		boolean keep = true;
-		if (sc.next() == "s") {
+		if (yesORno == "s") {
 			keep = true;
 			
-		} else if (sc.next() == "n") {
+		} else if (yesORno == "n") {
 			keep = false;
 		}
 		
-		sc.close();
+//		sc.close();  //devo fechar??? da erro ao fechar...
 		
 		return keep;
 		

@@ -19,7 +19,7 @@ public class Product extends Entity{
 		String productName = sc.nextLine();
 		this.setName(productName);
 		
-		sc.close();
+//		sc.close();  //devo fechar??? da erro ao fechar...
 		
 		//coloca desconto
 		System.out.println("\nQual o desconto do produto (%)? (valor unitario em percentagem)");
@@ -41,7 +41,7 @@ public class Product extends Entity{
 		Scanner sc = new Scanner(System.in);
 		
 		//alterar nome
-		System.out.println("\nAlterar nome("+ this.getName() +"): ");
+		System.out.println("\nAlterar nome('"+ this.getName() +"'): ");
 		boolean keep = keepValue();
 		
 		if (keep) {
@@ -52,7 +52,7 @@ public class Product extends Entity{
 		}
 		
 		
-		sc.close();
+//		sc.close();  //devo fechar??? da erro ao fechar...
 		
 		//alterar pvp
 		System.out.println("\nAlterar PVP("+ this.getPvp() +"euros): ");

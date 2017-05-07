@@ -63,7 +63,7 @@ public class Shelf extends Entity{
 			}
 		}
 		this.setProductId(intAux);
-		sc.close();
+//		sc.close();  //devo fechar??? da erro ao fechar...
 	}
 	
 	public void update(){
@@ -127,7 +127,7 @@ public class Shelf extends Entity{
 			}
 		}
 		this.setProductId(intAux);
-		sc.close();
+//		sc.close();  //devo fechar??? da erro ao fechar...
 	}
 	
 	public void show() {

@@ -11,7 +11,7 @@ public class TextInterface {
 		
 		Boolean run = true;
 		
-		while( run == true ){
+		while( run ){
 
 			System.out.println("\nPor favor selecione uma das seguintes opcoes: \n"
 					+ "1) Listar produtos \n"
@@ -39,17 +39,17 @@ public class TextInterface {
 						
 				default: 
 					System.out.println("\nInvalid input."
-										+ "\nChoose a valid option!");
+										+ "\n\nChoose a valid option!");
 					break;
 			}
 		}
 	}
 	
-	public static void menuProducts(){
+	private static void menuProducts(){
 		
 		Boolean run = true;
 		
-		while( run == true ){
+		while( run  ){
 			System.out.println("\nPor favor selecione uma das seguintes opcoes: \n"
 					+ "1) Criar novo Produto \n"
 					+ "2) Editar um produto existente \n"
@@ -74,33 +74,53 @@ public class TextInterface {
 				
 				case 2: //edita produto
 					
-					//get id
-					System.out.println("\nQual o ID do produto a editar?");
-					productId = Entity.checkInputLong();
-					
-					//edita um produto
-					ProductRepository.getInstance().consult(productId).update();
+					if (ProductRepository.getInstance().consult().size() == 0) {
+						System.out.println("There are no products!"
+								+ "\nStart by creating one!");
+					} else{	
+						//get id
+						System.out.println("\nQual o ID do produto a editar?");
+						productId = Entity.checkInputLong();
+						productId = ProductRepository.getInstance().checkId(productId);
+						
+						//edita um produto
+						ProductRepository.getInstance().consult(productId).update();
+					}
 					
 					printProductList();
 					break;
 						
 				case 3: //consulta produto
 					
-					//get id
-					System.out.println("\nQual o ID do produto a consultar?");
-					productId = Entity.checkInputLong();
-					
-					//mostra um produto
-					ProductRepository.getInstance().consult(productId).show();
+					if (ProductRepository.getInstance().consult().size() == 0) {
+						System.out.println("There are no products!"
+								+ "\nStart by creating one!");	
+					} else{
+						//get id
+						System.out.println("\nQual o ID do produto a consultar?");
+						productId = Entity.checkInputLong();
+						productId = ProductRepository.getInstance().checkId(productId);
+						
+						//mostra um produto
+						ProductRepository.getInstance().consult(productId).show();
+					}
 					break;
 					
 				case 4://remove produto
 					
-					//get id
-					System.out.println("\nQual o ID do produto a remover?");
-					productId = Entity.checkInputLong();
-						
-					ProductRepository.getInstance().remove(productId);
+					if (ProductRepository.getInstance().consult().size() == 0) {
+						System.out.println("There are no products!"
+								+ "\nStart by creating one!");	
+					} else{
+						//get id
+						System.out.println("\nQual o ID do produto a remover?");
+						productId = Entity.checkInputLong();
+						productId = ProductRepository.getInstance().checkId(productId);
+							
+						ProductRepository.getInstance().remove(productId);
+					}
+					
+					printProductList();
 					break;
 						
 				case 5: //volta ao menu anterior
@@ -109,13 +129,13 @@ public class TextInterface {
 				
 				default: //mostra novamente o menu
 					System.out.println("\nInvalid input..."
-										+ "\nChoose a valid option!");
+										+ "\n\nChoose a valid option!");
 					break;
 			}
 		}
 	}
 	
-	public static void menuShelf(){
+	private static void menuShelf(){
 		
 		Boolean run = true;
 		
@@ -130,7 +150,6 @@ public class TextInterface {
 			int option = Entity.checkInputInt();
 			
 			long shelfId = 0;
-			
 			switch (option){
 			
 				case 1: //cria prateleira
@@ -145,33 +164,52 @@ public class TextInterface {
 					
 				case 2: //editar prateleira
 					
-					//pedido de ID
-					System.out.println("\nQual o ID da prateleira a editar?");
-					shelfId = Entity.checkInputLong();
-					
-					//edita prateleira
-					ShelfRepository.getInstance().consult(shelfId).update();
-					
-					printShelfList();
+					if (ShelfRepository.getInstance().consult().size() == 0) {
+						System.out.println("There are no shelfs!"
+								+ "\nStart by creating one!");	
+					} else{
+						//pedido de ID
+						System.out.println("\nQual o ID da prateleira a editar?");
+						shelfId = Entity.checkInputLong();
+						shelfId = ShelfRepository.getInstance().checkId(shelfId);
+						
+						//edita prateleira
+						ShelfRepository.getInstance().consult(shelfId).update();
+						
+						printShelfList();
+					}
 					break;
 						
 				case 3: //consultar prateleira
 					
-					//pedido de ID
-					System.out.println("\nQual o ID da prateleira a consultar?");
-					shelfId = Entity.checkInputLong();
-					
-					//mostra prateleira
-					ShelfRepository.getInstance().consult(shelfId).show();
+					if (ShelfRepository.getInstance().consult().size() == 0) {
+						System.out.println("There are no shelfs!"
+								+ "\nStart by creating one!");	
+					} else{
+						//pedido de ID
+						System.out.println("\nQual o ID da prateleira a consultar?");
+						shelfId = Entity.checkInputLong();
+						shelfId = ShelfRepository.getInstance().checkId(shelfId);
+						
+						//mostra prateleira
+						ShelfRepository.getInstance().consult(shelfId).show();
+					}
 					break;
 						
-				case 4:
-					//pedido de ID
-					System.out.println("\nQual o ID da prateleira a remover?");
-					shelfId = Entity.checkInputLong();
+				case 4: // remover prateleira
 					
-					//remove prateleira
-					ShelfRepository.getInstance().remove(shelfId);
+					if (ShelfRepository.getInstance().consult().size() == 0) {
+						System.out.println("There are no shelfs!"
+								+ "\nStart by creating one!");	
+					} else{
+						//pedido de ID
+						System.out.println("\nQual o ID da prateleira a remover?");
+						shelfId = Entity.checkInputLong();
+						shelfId = ShelfRepository.getInstance().checkId(shelfId);
+						
+						//remove prateleira
+						ShelfRepository.getInstance().remove(shelfId);
+					}
 					break;
 					
 				case 5://volta ao menu anterior
@@ -181,7 +219,7 @@ public class TextInterface {
 				
 				default: //repete o menu
 					System.out.println("\nInvalid input..."
-										+ "\nChoose a valid option!");
+										+ "\n\nChoose a valid option!");
 					break;
 			}
 		}
