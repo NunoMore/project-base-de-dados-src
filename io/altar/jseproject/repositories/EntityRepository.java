@@ -40,7 +40,7 @@ public abstract class EntityRepository <Entidade extends Entity> { //Entidade se
 	public long checkId(long number){
 		
 		while(this.consult(number) == null) {
-			System.out.println("O ID introduzido não existe..."
+			System.out.println("O ID introduzido nao existe..."
 					+ "\nEscolha um ID que exista!");
 			number = Entity.checkInputLong();
 		}

@@ -13,21 +13,23 @@ public class TextInterface {
 		
 		while( run ){
 
-			System.out.println("\nPor favor selecione uma das seguintes opcoes: \n"
-					+ "1) Listar produtos \n"
-					+ "2) Listar prateleiras \n"
-					+ "3) Sair");
+			System.out.println("\nPor favor selecione uma das seguintes opcoes: "
+					+ "\n1) Listar produtos"
+					+ "\n2) Listar prateleiras"
+					+ "\n3) Sair");
 			
 			int option = Entity.checkInputInt();
 		
 			switch (option){
 			
-				case 1: 
+				case 1:
+					hasProducts();
 					printProductList();
 					menuProducts();
 					break;
 						
-				case 2: 		
+				case 2: 	
+					hasShelfs();
 					printShelfList();
 					menuShelf();
 					break;
@@ -59,28 +61,21 @@ public class TextInterface {
 			
 			int option = Entity.checkInputInt();
 			
-			long productId = 0;
 			switch (option){
 			
 				case 1: //cria produto
 					
 					//cria novo produto
-					ProductRepository.getInstance().consult(
-							ProductRepository.getInstance().create(new Product())
-							).create();
-					
+					ProductRepository.getInstance().create(new Product());
 					printProductList();
 					break;
 				
 				case 2: //edita produto
 					
-					if (ProductRepository.getInstance().consult().size() == 0) {
-						System.out.println("There are no products!"
-								+ "\nStart by creating one!");
-					} else{	
+					if (hasProducts()){
 						//get id
 						System.out.println("\nQual o ID do produto a editar?");
-						productId = Entity.checkInputLong();
+						long productId = Entity.checkInputLong();
 						productId = ProductRepository.getInstance().checkId(productId);
 						
 						//edita um produto
@@ -92,13 +87,10 @@ public class TextInterface {
 						
 				case 3: //consulta produto
 					
-					if (ProductRepository.getInstance().consult().size() == 0) {
-						System.out.println("There are no products!"
-								+ "\nStart by creating one!");	
-					} else{
+					if (hasProducts()){
 						//get id
 						System.out.println("\nQual o ID do produto a consultar?");
-						productId = Entity.checkInputLong();
+						long productId = Entity.checkInputLong();
 						productId = ProductRepository.getInstance().checkId(productId);
 						
 						//mostra um produto
@@ -108,16 +100,20 @@ public class TextInterface {
 					
 				case 4://remove produto
 					
-					if (ProductRepository.getInstance().consult().size() == 0) {
-						System.out.println("There are no products!"
-								+ "\nStart by creating one!");	
-					} else{
+					if (hasProducts()){
 						//get id
 						System.out.println("\nQual o ID do produto a remover?");
-						productId = Entity.checkInputLong();
+						long productId = Entity.checkInputLong();
 						productId = ProductRepository.getInstance().checkId(productId);
-							
-						ProductRepository.getInstance().remove(productId);
+						
+						boolean keep = Entity.keepValue();
+						
+						if (!keep) {
+							System.out.println("\nO valor foi removido.");
+							ProductRepository.getInstance().remove(productId);
+						}else {
+							System.out.println("\nOperacao anulada!");
+						}
 					}
 					
 					printProductList();
@@ -149,46 +145,37 @@ public class TextInterface {
 			
 			int option = Entity.checkInputInt();
 			
-			long shelfId = 0;
 			switch (option){
 			
 				case 1: //cria prateleira
 					
 					//cria nova prateleira
-					ShelfRepository.getInstance().consult(
-							ShelfRepository.getInstance().create(new Shelf())
-						).create();
+					ShelfRepository.getInstance().create(new Shelf());
 				
-					printShelfList();					
+					printShelfList();
 					break;
 					
 				case 2: //editar prateleira
 					
-					if (ShelfRepository.getInstance().consult().size() == 0) {
-						System.out.println("There are no shelfs!"
-								+ "\nStart by creating one!");	
-					} else{
+					if (hasShelfs()){
 						//pedido de ID
 						System.out.println("\nQual o ID da prateleira a editar?");
-						shelfId = Entity.checkInputLong();
+						long shelfId = Entity.checkInputLong();
 						shelfId = ShelfRepository.getInstance().checkId(shelfId);
 						
 						//edita prateleira
 						ShelfRepository.getInstance().consult(shelfId).update();
-						
-						printShelfList();
 					}
+					
+					printShelfList();
 					break;
 						
 				case 3: //consultar prateleira
 					
-					if (ShelfRepository.getInstance().consult().size() == 0) {
-						System.out.println("There are no shelfs!"
-								+ "\nStart by creating one!");	
-					} else{
+					if (hasShelfs()){
 						//pedido de ID
 						System.out.println("\nQual o ID da prateleira a consultar?");
-						shelfId = Entity.checkInputLong();
+						long shelfId = Entity.checkInputLong();
 						shelfId = ShelfRepository.getInstance().checkId(shelfId);
 						
 						//mostra prateleira
@@ -198,18 +185,23 @@ public class TextInterface {
 						
 				case 4: // remover prateleira
 					
-					if (ShelfRepository.getInstance().consult().size() == 0) {
-						System.out.println("There are no shelfs!"
-								+ "\nStart by creating one!");	
-					} else{
+					if (hasShelfs()){
 						//pedido de ID
 						System.out.println("\nQual o ID da prateleira a remover?");
-						shelfId = Entity.checkInputLong();
+						long shelfId = Entity.checkInputLong();
 						shelfId = ShelfRepository.getInstance().checkId(shelfId);
 						
-						//remove prateleira
-						ShelfRepository.getInstance().remove(shelfId);
+						boolean keep = Entity.keepValue();
+						
+						if (!keep) {
+							System.out.println("\nO valor foi removido.");
+							ShelfRepository.getInstance().remove(shelfId);
+						}else {
+							System.out.println("\nOperacao anulada!");
+						}
 					}
+					
+					printShelfList();
 					break;
 					
 				case 5://volta ao menu anterior
@@ -227,25 +219,37 @@ public class TextInterface {
 	
 	private static void printProductList(){
 		//emite lista de produtos
-		if (ProductRepository.getInstance().consult().size() != 0) {
-			System.out.println("\nProduct List:");
-			for (long i = 1; i <= ProductRepository.getInstance().consult().size(); i++) {
-				ProductRepository.getInstance().consult(i).show();
-			}
-		} else{
-			System.out.println("\nThere are no products!");
+		System.out.println("\nProduct List:");
+		for (long i = 1; i <= ProductRepository.getInstance().consult().size(); i++) {
+			ProductRepository.getInstance().consult(i).show();
 		}
 	}
 	
 	private static void printShelfList(){
 		//emite lista de prateleiras
-		if (ShelfRepository.getInstance().consult().size() != 0) {
-			System.out.println("\nShelf List:");
-			for (long i = 1; i <= ShelfRepository.getInstance().consult().size(); i++) {
-				ShelfRepository.getInstance().consult(i).show();
-			}
+		System.out.println("\nShelf List:");
+		for (long i = 1; i <= ShelfRepository.getInstance().consult().size(); i++) {
+			ShelfRepository.getInstance().consult(i).show();
+		}
+	}
+	
+	private static boolean hasProducts(){
+		if (ProductRepository.getInstance().consult().size() == 0) {
+			System.out.println("\nThere are no products!"
+					+ "\nStart by creating one!");
+			return false;
 		} else{
-			System.out.println("\nThere are no shelfs!");
+			return true;
+		}
+	}
+	
+	private static boolean hasShelfs(){
+		if (ShelfRepository.getInstance().consult().size() == 0) {
+			System.out.println("\nThere are no shelfs!"
+					+ "\nStart by creating one!");
+			return false;
+		} else{
+			return true;
 		}
 	}
 }

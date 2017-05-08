@@ -6,12 +6,12 @@ import java.util.Scanner;
 
 public class Product extends Entity{
 	public String name;
-	public ArrayList<Integer> shelfId = new ArrayList<>(); // not done yet...
+	public ArrayList<Long> shelfId = new ArrayList<>();
 	public int discount;
 	public double iva;
 	public double pvp;
 	
-	public void create(){
+	public Product(){
 		Scanner sc = new Scanner(System.in);
 		
 		//coloca nome
@@ -47,10 +47,9 @@ public class Product extends Entity{
 		if (keep) {
 			System.out.println("O valor foi mantido.");
 		}else {
-			System.out.println("Introduza o novo nome?");
+			System.out.println("Introduza o novo nome:");
 			this.setName( sc.nextLine() );
 		}
-		
 		
 //		sc.close();  //devo fechar??? da erro ao fechar...
 		
