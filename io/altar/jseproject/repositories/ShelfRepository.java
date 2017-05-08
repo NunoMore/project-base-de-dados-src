@@ -11,4 +11,22 @@ public class ShelfRepository extends EntityRepository<Shelf> {
 		
 		return INSTANCE; //nao se coloca this 
 	}
+	
+	public static void printShelfList(){
+		//emite lista de prateleiras
+		System.out.println("\nShelf List:");
+		for (long i = 1; i <= getInstance().consult().size(); i++) {
+			getInstance().consult(i).show();
+		}
+	}
+	
+	public static boolean hasShelfs(){
+		if (getInstance().consult().size() == 0) {
+			System.out.println("\nThere are no shelfs!"
+					+ "\nStart by creating one!");
+			return false;
+		} else{
+			return true;
+		}
+	}
 }
