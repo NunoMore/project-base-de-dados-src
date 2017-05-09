@@ -22,19 +22,22 @@ public class TextInterface {
 		
 			switch (option){
 			
-				case 1:
+				case 1: //Listar produtos
+					
 					ProductRepository.hasProducts();
 					ProductRepository.printProductList();
 					menuProducts();
 					break;
 						
-				case 2: 	
+				case 2: //Listar prateleiras
+					
 					ShelfRepository.hasShelfs();
 					ShelfRepository.printShelfList();
 					menuShelf();
 					break;
 					
-				case 3: 
+				case 3: //Sair
+					
 					System.out.println("\nGood bye!");
 					run = false;
 					break;
@@ -73,27 +76,18 @@ public class TextInterface {
 				case 2: //edita produto
 					
 					if (ProductRepository.hasProducts()){
-						//get id
-						System.out.println("\nQual o ID do produto a editar?");
-						long productId = Entity.checkInputLong();
-						productId = ProductRepository.getInstance().checkId(productId);
-						
-						//edita um produto
+						String msg = "\nQual o ID do produto a editar?";
+						long productId = ProductRepository.getInstance().checkId(msg);
 						ProductRepository.getInstance().consult(productId).update();
 					}
-					
 					ProductRepository.printProductList();
 					break;
 						
 				case 3: //consulta produto
 					
 					if (ProductRepository.hasProducts()){
-						//get id
-						System.out.println("\nQual o ID do produto a consultar?");
-						long productId = Entity.checkInputLong();
-						productId = ProductRepository.getInstance().checkId(productId);
-						
-						//mostra um produto
+						String msg = "\nQual o ID do produto a consultar?";
+						long productId = ProductRepository.getInstance().checkId(msg);
 						ProductRepository.getInstance().consult(productId).show();
 					}
 					break;
@@ -101,10 +95,8 @@ public class TextInterface {
 				case 4://remove produto
 					
 					if (ProductRepository.hasProducts()){
-						//get id
-						System.out.println("\nQual o ID do produto a remover?");
-						long productId = Entity.checkInputLong();
-						productId = ProductRepository.getInstance().checkId(productId);
+						String msg = "\nQual o ID do produto a remover?";
+						long productId = ProductRepository.getInstance().checkId(msg);
 						
 						boolean keep = Entity.keepValue();
 						
@@ -158,10 +150,10 @@ public class TextInterface {
 				case 2: //editar prateleira
 					
 					if (ShelfRepository.hasShelfs()){
-						//pedido de ID
-						System.out.println("\nQual o ID da prateleira a editar?");
-						long shelfId = Entity.checkInputLong();
-						shelfId = ShelfRepository.getInstance().checkId(shelfId);
+						String msg = "\nQual o ID da prateleira a editar?";
+						
+						//verifica e pede id
+						long shelfId = ShelfRepository.getInstance().checkId(msg);
 						
 						//edita prateleira
 						ShelfRepository.getInstance().consult(shelfId).update();
@@ -173,10 +165,10 @@ public class TextInterface {
 				case 3: //consultar prateleira
 					
 					if (ShelfRepository.hasShelfs()){
-						//pedido de ID
-						System.out.println("\nQual o ID da prateleira a consultar?");
-						long shelfId = Entity.checkInputLong();
-						shelfId = ShelfRepository.getInstance().checkId(shelfId);
+						String msg = "\nQual o ID da prateleira a consultar?";
+						
+						//verifica e pede id
+						long shelfId = ShelfRepository.getInstance().checkId(msg);
 						
 						//mostra prateleira
 						ShelfRepository.getInstance().consult(shelfId).show();
@@ -186,10 +178,10 @@ public class TextInterface {
 				case 4: // remover prateleira
 					
 					if (ShelfRepository.hasShelfs()){
-						//pedido de ID
-						System.out.println("\nQual o ID da prateleira a remover?");
-						long shelfId = Entity.checkInputLong();
-						shelfId = ShelfRepository.getInstance().checkId(shelfId);
+						String msg = "\nQual o ID da prateleira a remover?";
+						
+						//verifica e pede id
+						long shelfId = ShelfRepository.getInstance().checkId(msg);
 						
 						boolean keep = Entity.keepValue();
 						

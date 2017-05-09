@@ -1,16 +1,16 @@
 package io.altar.jseproject.stateinterface;
 
 
-public class FSM { //main menu
-    private State[] states = {new mainMenu(), new menuProducts(), new menuShelfs()};
-    private int[][] transition = {{2,1,0}, {0,2,1}, {1,2,2}};
+public class FSM { //State machine
+    private State[] states = {new stateMainMenu(), new stateMenuProducts(), new stateMenuShelfs()};
+    private int[][] transition = {{1, 2, 3}, {1, 2, 3, 4, 5}, {1, 2, 3, 4, 5}};
     private int current = 0;
 
     private void next(int msg) {
         current = transition[current][msg];
     }
 
-    public void on() {
+    public void menuProducts() {
         states[current].on();
         next(0);
     }

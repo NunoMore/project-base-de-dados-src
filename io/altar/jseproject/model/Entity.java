@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 
 public class Entity {
-	public Long id;
+	private Long id;
 
 	public Long getId() {
 		return id;
@@ -55,45 +55,21 @@ public class Entity {
 	public static boolean keepValue(){
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Deseja MANTER o valor? (s-sim / n-nao)");
+		System.out.println("Deseja REMOVER o valor? (s-sim / n-nao)");
 		String yesORno = sc.next();
 		
-		while (yesORno.equals("s") && yesORno.equals("n")) {
-			System.out.println("Por favor, ecreva 's' ou 'n' para MANTER(ou não) o valor!");
+		while (!yesORno.equals("s") && !yesORno.equals("n")) {
+			System.out.println("Por favor, ecreva 's' ou 'n' para REMOVER(ou não) o valor!");
 			yesORno = sc.next();
 		}
 		
-		boolean keep = true;
-		if (yesORno == "s") {
+		boolean keep = false;
+		if (yesORno.equals("n")) {
+			System.out.println("O valor foi mantido.");
 			keep = true;
-		} else if (yesORno == "n") {
-			keep = false;
 		}
 		
 //		sc.close();  //devo fechar??? da erro ao fechar...
 		return keep;
 	}
-	
-//	public static boolean removeValue(){
-//		Scanner sc = new Scanner(System.in);
-//		
-//		System.out.println("Deseja realmente remover o valor? (s-sim / n-nao)"
-//							+ "\nEsta accao nao tem retorno!");
-//		String yesORno = sc.next();
-//		
-//		while (yesORno.equals("s") && yesORno.equals("n")) {
-//			System.out.println("Por favor, ecreva 's' ou 'n' para remover(ou não) o valor!");
-//			yesORno = sc.next();
-//		}
-//		
-//		boolean remove = true;
-//		if (yesORno == "s") {
-//			remove = true;
-//		} else if (yesORno == "n") {
-//			remove = false;
-//		}
-//		
-////		sc.close();  //devo fechar??? da erro ao fechar...
-//		return remove;
-//	}
 }

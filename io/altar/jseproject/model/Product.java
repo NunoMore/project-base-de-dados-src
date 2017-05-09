@@ -44,9 +44,7 @@ public class Product extends Entity{
 		System.out.println("\nAlterar nome('"+ this.getName() +"'): ");
 		boolean keep = keepValue();
 		
-		if (keep) {
-			System.out.println("O valor foi mantido.");
-		}else {
+		if (!keep) {
 			System.out.println("Introduza o novo nome:");
 			this.setName( sc.nextLine() );
 		}
@@ -57,9 +55,7 @@ public class Product extends Entity{
 		System.out.println("\nAlterar PVP("+ this.getPvp() +"euros): ");
 		keep = keepValue();
 		
-		if (keep) {
-			System.out.println("O valor foi mantido.");
-		} else {
+		if (!keep) {
 			System.out.println("Introduza o novo valor de PVP:");
 			this.setPvp( checkInputDouble() );
 		}
@@ -68,9 +64,7 @@ public class Product extends Entity{
 		System.out.println("\nAlterar IVA("+ this.getIva() +"%): ");
 		keep = keepValue();
 		
-		if (keep) {
-			System.out.println("O valor foi mantido.");
-		} else {
+		if (!keep) {
 			System.out.println("Introduza o novo valor de IVA:");
 			this.setIva( checkInputDouble() );
 		}
@@ -79,9 +73,7 @@ public class Product extends Entity{
 		System.out.println("\nAlterar desconto("+ this.getDiscount() +"%): ");
 		keep = keepValue();
 		
-		if (keep) {
-			System.out.println("O valor foi mantido.");
-		} else {
+		if (!keep) {
 			System.out.println("Introduza o novo valor de desconto:");
 			this.setDiscount( checkInputInt() );
 		}

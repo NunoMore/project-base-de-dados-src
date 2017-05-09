@@ -31,19 +31,28 @@ public abstract class EntityRepository <Entidade extends Entity> { //Entidade se
 		return this.m1.get(id);
 	}
 	
-//	public void edit(Entidade ent){} // nao é utilizada... será mesmo necessario???
+//	public void edit(Entidade ent){  // nao é utilizada... será mesmo necessario???
+//		ent.update();
+//	}
 	
 	public void remove(long id){
 		this.m1.remove(id);
 	}
 	
-	public long checkId(long number){
-		
-		while(this.consult(number) == null) {
-			System.out.println("O ID introduzido nao existe..."
-					+ "\nEscolha um ID que exista!");
+	public long checkId(String message){
+		//get id
+		long number=0;
+		if (maiorId != 0) {
+			System.out.println(message);
 			number = Entity.checkInputLong();
+			
+			while(this.consult(number) == null) {
+				System.out.println("\nO ID introduzido nao existe..."
+						+ "\nEscolha um ID que exista!");
+				number = Entity.checkInputLong();
+			}
 		}
+		
 		return number;
 	}
 }

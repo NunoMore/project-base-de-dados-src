@@ -9,10 +9,10 @@ public class ProductRepository extends EntityRepository<Product> {
 	
 	public static ProductRepository getInstance(){
 		
-		return INSTANCE; //nao se coloca this 
+		return INSTANCE;
 	}
 	
-	public static void printProductList(){
+	public void printProductList(){
 		//emite lista de produtos
 		System.out.println("\nProduct List:");
 		for (long i = 1; i <= getInstance().consult().size(); i++) {
@@ -20,7 +20,7 @@ public class ProductRepository extends EntityRepository<Product> {
 		}
 	}
 	
-	public static boolean hasProducts(){
+	public boolean hasProducts(){
 		if (getInstance().consult().size() == 0) {
 			System.out.println("\nThere are no products!"
 					+ "\nStart by creating one!");

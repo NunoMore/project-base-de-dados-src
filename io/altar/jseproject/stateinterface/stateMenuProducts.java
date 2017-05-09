@@ -2,7 +2,7 @@ package io.altar.jseproject.stateinterface;
 
 import io.altar.jseproject.textinterface.TextInterface;
 
-public class menuProducts extends State{
+public class stateMenuProducts extends State{
     public void on() {
         TextInterface.menuProducts();
     }
