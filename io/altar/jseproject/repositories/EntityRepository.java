@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import io.altar.jseproject.model.Entity;
 
-public abstract class EntityRepository <Entidade extends Entity> { //Entidade sera product ou shelf
+public class EntityRepository <Entidade extends Entity> { //Entidade sera product ou shelf
 
 	private HashMap<Long, Entidade> m1 = new HashMap<>();
 	private long maiorId = 0;
@@ -56,7 +56,7 @@ public abstract class EntityRepository <Entidade extends Entity> { //Entidade se
 			
 			boolean keep = Entity.keepValue();
 			if (!keep) {
-				System.out.println("\nO valor foi removido.");
+				System.out.println("\nHouve remocao!");
 				this.m1.remove(productId);
 			}else {
 				System.out.println("\nOperacao anulada!");
@@ -84,15 +84,17 @@ public abstract class EntityRepository <Entidade extends Entity> { //Entidade se
 	public void printList(String entidade){ //produtos ou prateleiras
 		//emite lista de entidades
 		System.out.println("\nLista de " + entidade + "s:");
-		for (long i = 1; i <= consult().size(); i++) {
-			get(i).show();
+		for (long i = 1; i <= maiorId; i++) {
+			if (get(i)!=null) {
+				get(i).show();
+			}
 		}
 	}
 	
 	public boolean has(String entidade){ //produto ou prateleira
 		if (consult().size() == 0) {
 			System.out.println("\nNao existe qualquer " + entidade + "!"
-					+ "\nDeve criar primeiro!");
+								+ "\nDeve criar primeiro!");
 			return false;
 		} else{
 			return true;

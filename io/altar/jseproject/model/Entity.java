@@ -26,7 +26,7 @@ public class Entity {
 		}
 		int number = sc.nextInt();
 		
-//		sc.close();  //devo fechar??? da erro ao fechar...
+		sc.close();  //devo fechar??? da erro ao fechar...
 		return number;
 	}
 	
@@ -39,7 +39,7 @@ public class Entity {
 		}
 		long number = sc.nextLong();
 		
-//		sc.close();  //devo fechar??? da erro ao fechar...
+		sc.close();  //devo fechar??? da erro ao fechar...
 		return number;
 	}
 	
@@ -52,28 +52,28 @@ public class Entity {
 		}
 		double number = sc.nextDouble();
 		
-//		sc.close();  //devo fechar??? da erro ao fechar...
+		sc.close();  //devo fechar??? da erro ao fechar...
 		return number;
 	}
 	
 	public static boolean keepValue(){
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Deseja REMOVER o valor? (s-sim / n-nao)");
+		System.out.println("Deseja REMOVER? (s-sim / n-nao)");
 		String yesORno = sc.next();
 		
 		while (!yesORno.equals("s") && !yesORno.equals("n")) {
-			System.out.println("Por favor, ecreva 's' ou 'n' para REMOVER(ou não) o valor!");
+			System.out.println("Por favor, ecreva 's' ou 'n' para REMOVER(ou nao)!");
 			yesORno = sc.next();
 		}
 		
 		boolean keep = false;
 		if (yesORno.equals("n")) {
-			System.out.println("O valor foi mantido.");
+			System.out.println("Nao houve remocao!");
 			keep = true;
 		}
 		
-//		sc.close();  //devo fechar??? da erro ao fechar...
+		sc.close();  //devo fechar??? da erro ao fechar...
 		return keep;
 	}
 }

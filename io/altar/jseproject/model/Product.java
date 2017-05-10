@@ -5,11 +5,12 @@ import java.util.Scanner;
 
 
 public class Product extends Entity{
-	public String name;
-	public ArrayList<Long> shelfId = new ArrayList<>();
-	public int discount;
-	public double iva;
-	public double pvp;
+	private String name;
+	private ArrayList<Long> shelfId = new ArrayList<>();
+	private long maiorShelfId = 0;
+	private int discount;
+	private double iva;
+	private double pvp;
 	
 	public Product(){
 		Scanner sc = new Scanner(System.in);
@@ -19,7 +20,7 @@ public class Product extends Entity{
 		String productName = sc.nextLine();
 		this.setName(productName);
 		
-//		sc.close();  //devo fechar??? da erro ao fechar...
+		sc.close();  //devo fechar??? da erro ao fechar...
 		
 		//coloca desconto
 		System.out.println("\nQual o desconto do produto (%)? (valor unitario em percentagem)");
@@ -38,18 +39,17 @@ public class Product extends Entity{
 	}
 	
 	public void update() {
-		Scanner sc = new Scanner(System.in);
 		
 		//alterar nome
 		System.out.println("\nAlterar nome('"+ this.getName() +"'): ");
 		boolean keep = keepValue();
-		
+
+		Scanner sc = new Scanner(System.in);
 		if (!keep) {
 			System.out.println("Introduza o novo nome:");
 			this.setName( sc.nextLine() );
 		}
-		
-//		sc.close();  //devo fechar??? da erro ao fechar...
+		sc.close();  //devo fechar??? da erro ao fechar...
 		
 		//alterar pvp
 		System.out.println("\nAlterar PVP("+ this.getPvp() +"euros): ");
@@ -85,8 +85,25 @@ public class Product extends Entity{
 							this.getPvp() +"euros, (IVA)" + 
 							this.getIva() +"%, (desconto) " + 
 							this.getDiscount() +"%.");
+		if (shelfId.size()>0) {
+			System.out.println("Este produto encontra-se em: ");
+			for (long i = 0; i <= maiorShelfId; i++) {
+				if (shelfId.contains(i)) {
+					System.out.println("Prateleira - " + i);
+				}
+			}
+		} else if (shelfId.size()==0) {
+			System.out.println("Este produto nao se encontra em nenhuma prateleira!");
+		}
 	}
 	
+	public void addShelfId(long id){
+		shelfId.add(id);
+		maiorShelfId++;
+	}
+	public void removeShelfId(long id){
+		shelfId.remove(id);
+	}
 	public String getName() {
 		return name;
 	}

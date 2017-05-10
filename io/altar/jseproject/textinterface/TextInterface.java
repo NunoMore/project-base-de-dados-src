@@ -60,7 +60,7 @@ public class TextInterface {
 		}
 	}
 	
-	public static void subMenu(EntityRepository repository, String entidade){
+	public static void subMenu(EntityRepository/*<? extends Entity>*/ repository, String entidade){
 		
 		entidade = entidade.trim().toLowerCase(); //para o simples caso de receber espacos ou maiusculas na palavra 'produto' ou 'prateleira'
 		

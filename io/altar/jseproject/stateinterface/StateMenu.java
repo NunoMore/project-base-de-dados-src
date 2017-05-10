@@ -6,11 +6,9 @@ import io.altar.jseproject.model.Shelf;
 import io.altar.jseproject.repositories.EntityRepository;
 import io.altar.jseproject.repositories.ProductRepository;
 import io.altar.jseproject.repositories.ShelfRepository;
-import io.altar.jseproject.test.Test;
 
 public class StateMenu {
 
-	//protected final stateMachine STATE_MACHINE = Test.getMachine();
 	protected final ShelfRepository SHELF_REPOSITORY = ShelfRepository.getInstance();
 	protected final ProductRepository PRODUCT_REPOSITORY = ProductRepository.getInstance();
 	
@@ -26,7 +24,7 @@ public class StateMenu {
 		
 		entidade = entidade.trim().toLowerCase(); //para o simples caso de receber espacos ou maiusculas na palavra 'produto' ou 'prateleira'
 		
-		Boolean run = true;		
+		Boolean run = true;
 		while( run  ){
 			System.out.println("\nPor favor selecione uma das seguintes opcoes: \n"
 					+ "1) Criar novo(a) "+ entidade +" \n"
