@@ -4,7 +4,15 @@ import io.altar.jseproject.textinterface.TextInterface;
 
 public class stateMenuProducts extends State{
     public void on() {
-        TextInterface.menuProducts();
+
+		String entidade = "produto";
+		productRepository.has(entidade);
+		productRepository.printList(entidade);
+		
+		subMenu(productRepository, entidade); 
+		break;
+		
+        TextInterface.subMenu(productRepository, "produto");
     }
 
     public void off() {

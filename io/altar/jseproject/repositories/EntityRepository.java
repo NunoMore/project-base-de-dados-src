@@ -11,15 +11,17 @@ public abstract class EntityRepository <Entidade extends Entity> { //Entidade se
 	private long maiorId = 0;
 	
 	private Long nextId(){ 
-		return ++this.maiorId;
+		return ++maiorId;
+	}
+	
+	public Entidade get(long id){
+		return this.m1.get(id);
 	}
  
 	public Long create(Entidade ent) {
 		
 		ent.setId(this.nextId());
-		
 		this.m1.put(ent.getId(), ent);
-		
 		return ent.getId();
 	}
 	
@@ -27,32 +29,73 @@ public abstract class EntityRepository <Entidade extends Entity> { //Entidade se
 		return this.m1.values();
 	}
 	
-	public Entidade consult(long id){
-		return this.m1.get(id);
+	public void consult( String entidade){
+		
+		if (has(entidade)){
+			String msg = "\nQual o ID do(a) "+ entidade +" a consultar?";
+			long id = checkId(msg);
+			get(id).show();
+		}
 	}
 	
-//	public void edit(Entidade ent){  // nao é utilizada... será mesmo necessario???
-//		ent.update();
-//	}
+	public void edit(String entidade){  
+		
+		if (has(entidade)){
+			String msg = "\nQual o ID do(a) "+ entidade + " a editar?";
+			long id = checkId(msg);
+			get(id).update();
+		}
+		printList(entidade);
+	}
 	
-	public void remove(long id){
-		this.m1.remove(id);
+	public void remove(String entidade){
+
+		if (has(entidade)){
+			String msg = "\nQual o ID do(a) "+ entidade +" a remover?";
+			long productId = checkId(msg);
+			
+			boolean keep = Entity.keepValue();
+			if (!keep) {
+				System.out.println("\nO valor foi removido.");
+				this.m1.remove(productId);
+			}else {
+				System.out.println("\nOperacao anulada!");
+			}
+		}
+		printList(entidade);
 	}
 	
 	public long checkId(String message){
 		//get id
-		long number=0;
+		long id = 0; //se nao houver id ele retorna 0. 
 		if (maiorId != 0) {
 			System.out.println(message);
-			number = Entity.checkInputLong();
+			id = Entity.checkInputLong();
 			
-			while(this.consult(number) == null) {
+			while(get(id) == null) {
 				System.out.println("\nO ID introduzido nao existe..."
-						+ "\nEscolha um ID que exista!");
-				number = Entity.checkInputLong();
+									+ "\nEscolha um ID que exista!");
+				id = Entity.checkInputLong();
 			}
 		}
-		
-		return number;
+		return id;
+	}
+	
+	public void printList(String entidade){ //produtos ou prateleiras
+		//emite lista de entidades
+		System.out.println("\nLista de " + entidade + "s:");
+		for (long i = 1; i <= consult().size(); i++) {
+			get(i).show();
+		}
+	}
+	
+	public boolean has(String entidade){ //produto ou prateleira
+		if (consult().size() == 0) {
+			System.out.println("\nNao existe qualquer " + entidade + "!"
+					+ "\nStart by creating one!");
+			return false;
+		} else{
+			return true;
+		}
 	}
 }

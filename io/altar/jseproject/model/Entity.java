@@ -13,6 +13,10 @@ public class Entity {
 		this.id = id;
 	}
 	
+	public void show(){}
+	public void update(){}
+	
+	
 	public static int checkInputInt(){
 		Scanner sc = new Scanner(System.in);
 		

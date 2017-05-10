@@ -33,8 +33,8 @@ public class Shelf extends Entity{
 		String msg = "\nQual o ID do produto a colocar na prateleira? (valor unitario)";
 		long id = ProductRepository.getInstance().checkId(msg);
 		this.setProductId(id);
-		if (!ProductRepository.getInstance().hasProducts()) {
-			ProductRepository.getInstance().consult(id).shelfId.add( this.getId() ); 
+		if (!ProductRepository.getInstance().has("products")) {
+			ProductRepository.getInstance().get(id).shelfId.add( this.getId() ); 
 		}
 		
 //		sc.close();  //devo fechar??? da erro ao fechar...
@@ -71,16 +71,16 @@ public class Shelf extends Entity{
 		}
 		
 		//alterar produto
-		if (!ProductRepository.getInstance().hasProducts()) {
+		if (!ProductRepository.getInstance().has("products")) {
 			System.out.println("\nAlterar produto existente(Produto "+ this.getProductId() +"): ");
 			
 			keep = keepValue();
 			if (!keep) {
-				ProductRepository.getInstance().consult( this.getProductId() ).shelfId.remove( this.getId() );
+				ProductRepository.getInstance().get( this.getProductId() ).shelfId.remove( this.getId() );
 				String msg = "Introduza o ID do novo produto para a prateleira:";
 				long id = ProductRepository.getInstance().checkId(msg);
 				this.setProductId(id);
-				ProductRepository.getInstance().consult(id).shelfId.add( this.getId() );
+				ProductRepository.getInstance().get(id).shelfId.add( this.getId() );
 			}
 		}
 		
@@ -94,7 +94,7 @@ public class Shelf extends Entity{
 				this.getCapacity() +", (id de produto exposto) " + 
 				this.getProductId() +", (preco de aluguer) " + 
 				this.getRentPrice() +"euros.\n");
-	}
+	} 
 	
 	public String getLocation() {
 		return location;

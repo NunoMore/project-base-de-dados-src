@@ -11,22 +11,4 @@ public class ProductRepository extends EntityRepository<Product> {
 		
 		return INSTANCE;
 	}
-	
-	public void printProductList(){
-		//emite lista de produtos
-		System.out.println("\nProduct List:");
-		for (long i = 1; i <= getInstance().consult().size(); i++) {
-			getInstance().consult(i).show();
-		}
-	}
-	
-	public boolean hasProducts(){
-		if (getInstance().consult().size() == 0) {
-			System.out.println("\nThere are no products!"
-					+ "\nStart by creating one!");
-			return false;
-		} else{
-			return true;
-		}
-	}
 }
