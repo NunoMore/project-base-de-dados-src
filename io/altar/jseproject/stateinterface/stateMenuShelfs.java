@@ -1,15 +1,17 @@
 package io.altar.jseproject.stateinterface;
 
-import io.altar.jseproject.repositories.ShelfRepository;
-import io.altar.jseproject.textinterface.TextInterface;
 
-public class stateMenuShelfs extends State{
-    public void on() {
-        TextInterface.subMenu(ShelfRepository.getInstance(), "prateleira");
+public class stateMenuShelfs extends StateMenu{
+    public void on() { //Listar prateleiras
+
+		String entidade = "prateleira";
+		SHELF_REPOSITORY.has(entidade);
+		SHELF_REPOSITORY.printList(entidade);
+		
+		subMenu(SHELF_REPOSITORY, entidade); 
     }
 
     public void off() {
-    	TextInterface.mainMenu();
+    	stateMachine.changeState(0);
     }
-
 }

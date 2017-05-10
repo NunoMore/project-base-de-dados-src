@@ -92,7 +92,7 @@ public abstract class EntityRepository <Entidade extends Entity> { //Entidade se
 	public boolean has(String entidade){ //produto ou prateleira
 		if (consult().size() == 0) {
 			System.out.println("\nNao existe qualquer " + entidade + "!"
-					+ "\nStart by creating one!");
+					+ "\nDeve criar primeiro!");
 			return false;
 		} else{
 			return true;

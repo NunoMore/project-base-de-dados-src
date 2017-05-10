@@ -1,26 +1,17 @@
 package io.altar.jseproject.stateinterface;
 
-import io.altar.jseproject.textinterface.TextInterface;
 
-public class stateMenuProducts extends State{
-    public void on() {
+public class stateMenuProducts extends StateMenu{
+    public void on() { //Listar produtos
 
 		String entidade = "produto";
-		productRepository.has(entidade);
-		productRepository.printList(entidade);
+		PRODUCT_REPOSITORY.has(entidade);
+		PRODUCT_REPOSITORY.printList(entidade);
 		
-		subMenu(productRepository, entidade); 
-		break;
-		
-        TextInterface.subMenu(productRepository, "produto");
+		subMenu(PRODUCT_REPOSITORY, entidade); 
     }
 
-    public void off() {
-        TextInterface.mainMenu();
+    public void off() { 
+    	stateMachine.changeState(0);
     }
-
-    public void ack() {
-        System.out.println("A + ack = A");
-    }
-
 }

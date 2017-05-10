@@ -2,7 +2,7 @@ package io.altar.jseproject.stateinterface;
 
 import io.altar.jseproject.model.Entity;
 
-public class stateMainMenu extends State{
+public class stateMainMenu extends StateMenu{
 	
 	public void on() {
 		Boolean run = true;

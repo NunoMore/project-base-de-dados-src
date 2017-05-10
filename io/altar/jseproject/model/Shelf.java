@@ -33,7 +33,7 @@ public class Shelf extends Entity{
 		String msg = "\nQual o ID do produto a colocar na prateleira? (valor unitario)";
 		long id = ProductRepository.getInstance().checkId(msg);
 		this.setProductId(id);
-		if (!ProductRepository.getInstance().has("products")) {
+		if (ProductRepository.getInstance().has("produto")) {
 			ProductRepository.getInstance().get(id).shelfId.add( this.getId() ); 
 		}
 		
