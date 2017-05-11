@@ -25,7 +25,7 @@ public class EntityRepository <Entidade extends Entity> { //Entidade sera produc
 		return ent.getId();
 	}
 	
-	public Collection<Entidade> consult(){
+	public Collection<Entidade> consult(){ //nao faz sentido existir penso mas enfim...
 		return this.m1.values();
 	}
 	
@@ -83,10 +83,12 @@ public class EntityRepository <Entidade extends Entity> { //Entidade sera produc
 	
 	public void printList(String entidade){ //produtos ou prateleiras
 		//emite lista de entidades
-		System.out.println("\nLista de " + entidade + "s:");
-		for (long i = 1; i <= maiorId; i++) {
-			if (get(i)!=null) {
-				get(i).show();
+		if (has(entidade)) {
+			System.out.println("\nLista de " + entidade + "s:");
+			for (long i = 1; i <= maiorId; i++) {
+				if (get(i)!=null) {
+					get(i).show();
+				}
 			}
 		}
 	}
