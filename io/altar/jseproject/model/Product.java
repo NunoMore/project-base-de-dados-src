@@ -1,7 +1,6 @@
 package io.altar.jseproject.model;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class Product extends Entity{
@@ -13,15 +12,12 @@ public class Product extends Entity{
 	private double pvp;
 	
 	public Product(){
-		Scanner sc = new Scanner(System.in);
 		
 		//coloca nome
 		System.out.println("\nQual o nome do produto?");
-		String productName = sc.nextLine();
+		String productName = sc.next();
 		this.setName(productName);
-		
-		sc.close();  //devo fechar??? da erro ao fechar...
-		
+				
 		//coloca desconto
 		System.out.println("\nQual o desconto do produto (%)? (valor unitario em percentagem)");
 		int intAux = checkInputInt();
@@ -44,12 +40,10 @@ public class Product extends Entity{
 		System.out.println("\nAlterar nome('"+ this.getName() +"'): ");
 		boolean keep = keepValue();
 
-		Scanner sc = new Scanner(System.in);
 		if (!keep) {
 			System.out.println("Introduza o novo nome:");
 			this.setName( sc.nextLine() );
 		}
-		sc.close();  //devo fechar??? da erro ao fechar...
 		
 		//alterar pvp
 		System.out.println("\nAlterar PVP("+ this.getPvp() +"euros): ");

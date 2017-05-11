@@ -3,7 +3,9 @@ package io.altar.jseproject.model;
 import java.util.Scanner;
 
 
+
 public class Entity {
+	protected static Scanner sc = new Scanner(System.in);
 	private Long id;
 
 	public Long getId() {
@@ -18,7 +20,6 @@ public class Entity {
 	
 	
 	public static int checkInputInt(){
-		Scanner sc = new Scanner(System.in);
 		
 		while(!sc.hasNextInt()){
 			System.out.println("\nInput is not a valid number!");
@@ -26,12 +27,10 @@ public class Entity {
 		}
 		int number = sc.nextInt();
 		
-		sc.close();  //devo fechar??? da erro ao fechar...
 		return number;
 	}
 	
 	public static long checkInputLong(){
-		Scanner sc = new Scanner(System.in);
 		
 		while(!sc.hasNextLong()){
 			System.out.println("\nInput is not a valid number!");
@@ -39,12 +38,10 @@ public class Entity {
 		}
 		long number = sc.nextLong();
 		
-		sc.close();  //devo fechar??? da erro ao fechar...
 		return number;
 	}
 	
 	public static double checkInputDouble(){
-		Scanner sc = new Scanner(System.in);
 		
 		while(!sc.hasNextDouble()){
 			System.out.println("\nInput is not a valid number!");
@@ -52,12 +49,10 @@ public class Entity {
 		}
 		double number = sc.nextDouble();
 		
-		sc.close();  //devo fechar??? da erro ao fechar...
 		return number;
 	}
 	
 	public static boolean keepValue(){
-		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Deseja REMOVER? (s-sim / n-nao)");
 		String yesORno = sc.next();
@@ -73,7 +68,6 @@ public class Entity {
 			keep = true;
 		}
 		
-		sc.close();  //devo fechar??? da erro ao fechar...
 		return keep;
 	}
 }

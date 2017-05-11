@@ -1,25 +1,22 @@
 package io.altar.jseproject.model;
 
-import java.util.Scanner;
 
 import io.altar.jseproject.repositories.ProductRepository;
 
 public class Shelf extends Entity{
+	
+	private enum Location{TOP, MID, BOT};
 	private String location;
 	private int capacity;
 	private long productId;
 	private double rentPrice;
 	
 	public Shelf(){
-		
-		Scanner sc = new Scanner(System.in);
-		
+				
 		//coloca localizacao 
-		System.out.println("\nQual a localizacao da prateleira?");
-		String location = sc.nextLine();
+		System.out.println("\nQual a localizacao da prateleira? (TOP, MID or BOT)");
+		String location = checkInputLocation();
 		this.setLocation(location);
-
-		sc.close();  //devo fechar??? da erro ao fechar...
 
 		//coloca capacidade
 		System.out.println("\nQual a capacidade da prateleira (produtos)? (valor unitario)");
@@ -46,12 +43,11 @@ public class Shelf extends Entity{
 		System.out.println("\nAlterar codigo de localizacao("+ this.getLocation() +"): ");
 		boolean keep = keepValue();
 
-		Scanner sc = new Scanner(System.in);
 		if (!keep) {
 			System.out.println("Introduza nova localizacao:");
-			this.setLocation(sc.nextLine() );
+			String location = checkInputLocation();
+			this.setLocation(location);
 		}		
-		sc.close();  //devo fechar??? da erro ao fechar...
 		
 		//alterar capacidade
 		System.out.println("\nAlterar capacidade("+ this.getCapacity() +"): ");
@@ -96,7 +92,19 @@ public class Shelf extends Entity{
 				this.getCapacity() +", (id de produto exposto) " + 
 				this.getProductId() +", (preco de aluguer) " + 
 				this.getRentPrice() +"euros.");
-	} 
+	}
+	
+	private String checkInputLocation(){
+		while (true){
+			String location = sc.next();
+			location = location.trim().toUpperCase();
+			if (location.equals(Location.TOP.toString()) || location.equals(Location.MID.toString()) || location.equals(Location.BOT.toString())) {
+				return location;
+			} else{
+				System.out.println("Location not valid!");
+			}
+		}
+	}
 	
 	public String getLocation() {
 		return location;
