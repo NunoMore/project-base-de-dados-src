@@ -34,7 +34,7 @@ public class TextInterface {
 					productRepository.has(entidade);
 					productRepository.printList(entidade);
 					
-					subMenu(productRepository, entidade); 
+					subMenu(productRepository, entidade);  
 					break;
 						
 				case 2: //Listar prateleiras
@@ -70,7 +70,7 @@ public class TextInterface {
 					+ "1) Criar novo(a) "+ entidade +" \n"
 					+ "2) Editar um(a) "+ entidade +" existente \n"
 					+ "3) Consultar o detalhe de um(a) "+ entidade + " \n"
-					+ "4) Remover um(a) "+ entidade + " \n"
+					+ "4) Remover um(a) "+ entidade + " \n" 
 					+ "5) Voltar ao ecra anterior");
 			
 			int option = Entity.checkInputInt();

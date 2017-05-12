@@ -5,27 +5,27 @@ import java.util.HashMap;
 
 import io.altar.jseproject.model.Entity;
 
-public class EntityRepository <Entidade extends Entity> { //Entidade sera product ou shelf
+public class EntityRepository <E extends Entity> { //T sera product ou shelf
 
-	private HashMap<Long, Entidade> m1 = new HashMap<>();
+	private HashMap<Long, E> m1 = new HashMap<>();
 	private long maiorId = 0;
 	
 	private Long nextId(){ 
 		return ++maiorId;
 	}
 	
-	public Entidade get(long id){
+	public E get(long id){
 		return this.m1.get(id);
 	}
  
-	public Long create(Entidade ent) {
+	public Long create(E e) {
 		
-		ent.setId(this.nextId());
-		this.m1.put(ent.getId(), ent);
-		return ent.getId();
+		e.setId(this.nextId());
+		this.m1.put(e.getId(), e);
+		return e.getId();
 	}
 	
-	public Collection<Entidade> consult(){ //nao faz sentido existir penso mas enfim...
+	public Collection<E> consult(){ //nao faz sentido existir penso mas enfim...
 		return this.m1.values();
 	}
 	
@@ -90,13 +90,14 @@ public class EntityRepository <Entidade extends Entity> { //Entidade sera produc
 					get(i).show();
 				}
 			}
+		} else {
+			System.out.println("\nNao existe qualquer " + entidade + "!"
+								+ "\nDeve criar primeiro!");
 		}
 	}
 	
 	public boolean has(String entidade){ //produto ou prateleira
 		if (consult().size() == 0) {
-			System.out.println("\nNao existe qualquer " + entidade + "!"
-								+ "\nDeve criar primeiro!");
 			return false;
 		} else{
 			return true;
