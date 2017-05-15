@@ -15,6 +15,7 @@ public class TextInterface {
 	public static void mainMenu(){
 		
 		String entidade = "";
+		Entity item = null;
 		
 		Boolean run = true;
 		while( run ){
@@ -33,8 +34,9 @@ public class TextInterface {
 					entidade = "produto";
 					productRepository.has(entidade);
 					productRepository.printList(entidade);
+					item = new Product();
 					
-					subMenu(productRepository, entidade);  
+					subMenu(productRepository, (Product)item, entidade);  
 					break;
 						
 				case 2: //Listar prateleiras
@@ -42,8 +44,9 @@ public class TextInterface {
 					entidade = "prateleira";
 					shelfRepository.has(entidade);
 					shelfRepository.printList(entidade);
+					item = new Shelf();
 					
-					subMenu(shelfRepository, entidade); 
+					subMenu(shelfRepository, (Shelf)item, entidade); 
 					break;
 					
 				case 3: //Sair
@@ -60,7 +63,7 @@ public class TextInterface {
 		}
 	}
 	
-	public static void subMenu(EntityRepository/*<? extends Entity>*/ repository, String entidade){
+	public static <T extends Entity> void subMenu(EntityRepository<T> repository, T item, String entidade){
 		
 		entidade = entidade.trim().toLowerCase(); //para o simples caso de receber espacos ou maiusculas na palavra 'produto' ou 'prateleira'
 		
@@ -77,14 +80,6 @@ public class TextInterface {
 			switch (option){
 			
 				case 1: //cria entidade
-					
-					Entity item = new Entity();
-					if(entidade.equals("produto")){
-						item = new Product();
-					}
-					else if(entidade.equals("prateleira")){
-						item = new Shelf();
-					}
 					repository.create(item);
 					repository.printList(entidade);
 					break;
